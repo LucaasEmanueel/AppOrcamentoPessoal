@@ -10,15 +10,16 @@ class Despesa{
 
 	validarDados(){
 		for(let i in this){
-			if(this[i] == underfined || this[i] == '' || this[i] == null){
+			if(this[i] == undefined || this[i] == '' || this[i] == null){
 				return false
 			}
 		}
+		return true
 	}
 }
 
 class Bd{
-
+ 
 	constructor(){
 		let id = localStorage.getItem('id')
 
@@ -62,11 +63,19 @@ function cadastrarDespesa(){
 	if(despesa.validarDados()){
 		//bd.gravar(despesa)
 		//dialog de sucesso
-		console.log('Dados válidos')
+		document.getElementById('modal_titulo').innerHTML = 'Registro inserido com sucesso'
+		document.getElementById('modal_titulo_div').className = 'modal-header text-success'
+		document.getElementById('modal_conteudo').innerHTML = 'Despesa cadastrada com SUCESSO!'
+		document.getElementById('modal_btn').className = 'btn btn-success'
+		document.getElementById('modal_btn').innerHTML = 'Voltar'
+		$('#modalRegistroDespesa').modal('show')
 	}else{
 		//dialog de erro
-		console.log('Dados inválidos')
+		document.getElementById('modal_titulo').innerHTML = 'Dados inválidos!'
+		document.getElementById('modal_titulo_div').className = 'modal-header text-danger'
+		document.getElementById('modal_conteudo').innerHTML = 'Por favor, preencha completamente TODOS os campos.'
+		document.getElementById('modal_btn').innerHTML = 'Voltar e completar os campos!'
+		document.getElementById('modal_btn').className = 'btn btn-danger'
+		$('#modalRegistroDespesa').modal('show')
 	}
-	
-
 }
